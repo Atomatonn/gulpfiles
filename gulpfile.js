@@ -5,13 +5,16 @@ var gulp = require('gulp'),
 	});
 
 //Sass Compilation
+var scssFiles = './scss/main.scss',
+	scssDest = './css';
+
 gulp.task('scss', function() {
-	gulp.src('./scss/main.scss')
+	gulp.src(scssFiles)
 		.pipe(plugins.plumber())
 		.pipe(plugins.sass({
 			errLogToConsole: true
 		}))
-		.pipe(gulp.dest('./css'))
+		.pipe(gulp.dest(scssDest))
 		.pipe(plugins.browserSync.reload({
 			stream: true
 		}));

@@ -66,7 +66,7 @@ gulp.task('scripts', function() {
 
 // Image Minification
 var imgFiles = './img/**/*',
-	imgDest = './dist/scripts';
+	imgDest = './dist/images';
 
 gulp.task('imagemin', function() {
 	gulp.src(imgFiles)

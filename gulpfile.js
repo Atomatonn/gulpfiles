@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 
 //Sass Compilation
 function sass(done) {
-    gulp.src('./scss/main.scss')
+    gulp.src('./scss/!main.scss')
         .pipe(plugins.plumber())
         .pipe(plugins.sass({
             errLogToConsole: true
@@ -50,8 +50,8 @@ var jsFiles = './js/*.js',
 
 function js(done) {
     return gulp.src(jsFiles)
-        .pipe(plugins.terser())
         .pipe(plugins.plumber())
+        .pipe(plugins.terser())
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat('scripts.js'))
         .pipe(gulp.dest(jsDest))
@@ -107,6 +107,7 @@ function watch_files() {
     gulp.watch('./dist/js/*.js', reload);
     gulp.watch('./dist/css/*.css', reload);
     // gulp.watch('./*.html', reload);
+    gulp.watch("./*.html").on('change', reload);
 };
 //
 //     gulp.watch('./scss/**/*.scss', ['scss']);
@@ -128,6 +129,6 @@ gulp.task("js", js);
 
 gulp.task("image_min", image_min);
 
-gulp.task('default', gulp.parallel(sass, css, js, image_min));
+gulp.task('default', gulp.parallel(sass, css, js, image_min, watch_files));
 
 gulp.task('watch', gulp.series(watch_files));
